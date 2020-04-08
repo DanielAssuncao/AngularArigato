@@ -1,0 +1,25 @@
+<div>
+    <form [formGroup]="cadastroCliente">
+        <label>Nome:</label>
+        <br />
+        <input formControlName="nomeCliente" type="text" />
+        <br />
+        <label>CPF:</label>
+        <br />
+        <input formControlName="cpfCliente" type="number" />
+        <br />
+        <label>RG:</label>
+        <br />
+        <input formControlName="rgCliente" type="number" />
+        <br />
+        <label>Telefone:</label>
+        <br />
+        <input formControlName="telefoneCliente" type="number" />
+        <br />
+    </form>
+    <button (click)="enviarDados()">Enviar Dados!</button>
+    <br />
+    <pre>
+        {{ data | json }}
+    </pre>
+</div>
