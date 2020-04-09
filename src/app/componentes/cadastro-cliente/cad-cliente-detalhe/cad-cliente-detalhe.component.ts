@@ -8,15 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadClienteDetalheComponent implements OnInit {
 
-  cliente: Array<any>;
+  constructor() { }
 
-  constructor(private cadClienteService: CadClienteService) { }
-
-  ngOnInit() {
-    this.detalhar();
-  }
-
-  detalhar(){
-    this.cadClienteService.detalhar().subscribe(dados => this.cliente = dados);
-  }
+  ngOnInit() {}
 }
