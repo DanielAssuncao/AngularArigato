@@ -69,6 +69,9 @@
                 <button type="button" class="btn btn-danger btn-sm ml-1">Deletar</button> <!-- (click)="deleteCar(car)"-->
             </td>
             </tr>
+            <tr *ngIf="listaClientes.length == 0">
+                <td>Nenhum registro encontrado!</td>
+            </tr>
         </tbody>
         </table>
     </div>

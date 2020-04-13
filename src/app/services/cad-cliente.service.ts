@@ -26,18 +26,11 @@ export class CadClienteService {
   }
 
   // Obtem a lista de todos os clientes cadastrados no sistema de acordo com o filtro inserido
-  listarComFiltro(filter : CadClienteFilter): Observable<CadClienteFilter>{
-    var retornoPost = this.httpClient.post<CadClienteFilter>(this.cadClienteUrl, JSON.stringify(filter), this.httpOptions)
+  listarComFiltro(filter : CadClienteFilter): Observable<CadCliente[]>{
+    return this.httpClient.post<CadCliente[]>(this.cadClienteUrl, JSON.stringify(filter), this.httpOptions)
     .pipe(
       retry(2),
-      catchError(this.handleError),
-      map((cadCliente: CadCliente) => cadCliente)
-      )
-      retornoPost.subscribe(x => { 
-        this.listaFiltrada.push(x);
-        console.log(this.listaFiltrada);
-      });
-    return retornoPost; 
+      catchError(this.handleError))
   }
 
   // Manipulação de erros

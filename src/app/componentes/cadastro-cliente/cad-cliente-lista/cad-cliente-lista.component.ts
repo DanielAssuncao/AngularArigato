@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { CadClienteService } from './../../../services/cad-cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from "@angular/forms"
@@ -13,7 +14,6 @@ export class CadClienteListaComponent implements OnInit {
 
   listaClientes: Array<CadCliente>;
   cadClienteFilter = {} as CadClienteFilter;
-  listaFiltrada: Array<CadCliente> = [];
   
   //variáveis do formulário do filtro
   nome: string;
@@ -38,8 +38,9 @@ export class CadClienteListaComponent implements OnInit {
     this.cadClienteFilter.rg = f.value.filter.rg;
     this.cadClienteFilter.cpf = f.value.filter.cpf;
     
-    this.cadClienteService.listarComFiltro(this.cadClienteFilter).subscribe((dados) => { this.cleanForm(f); });
-    console.log("Component = " + this.listaClientes);
+    const listaFiltrada = this.cadClienteService.listarComFiltro(this.cadClienteFilter).pipe(map(cadCliente => cadCliente));
+    listaFiltrada.subscribe(x => {this.listaClientes = x})
+    this.cleanForm(f);
   }
 
   // limpa o formulario
