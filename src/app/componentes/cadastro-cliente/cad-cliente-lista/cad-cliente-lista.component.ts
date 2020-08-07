@@ -1,9 +1,9 @@
+import { CadCliente } from './../../../models/cad-cliente';
 import { map } from 'rxjs/operators';
 import { CadClienteService } from './../../../services/cad-cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from "@angular/forms"
 import { CadClienteFilter } from 'src/app/models/cad-cliente-filter';
-import { CadCliente } from 'src/app/models/cad-cliente';
 
 @Component({
   selector: 'app-cad-cliente-lista',
@@ -14,12 +14,6 @@ export class CadClienteListaComponent implements OnInit {
 
   listaClientes: Array<CadCliente>;
   cadClienteFilter = {} as CadClienteFilter;
-  
-  //variáveis do formulário do filtro
-  nome: string;
-  telefone: number;
-  rg: number;
-  cpf: number;
 
   constructor(private cadClienteService: CadClienteService) { }  
 
@@ -29,9 +23,11 @@ export class CadClienteListaComponent implements OnInit {
 
   // Chama a service para obter a lista de clientes já cadastrados no sistema
   listar(){
-    this.cadClienteService.listar().subscribe(dados => this.listaClientes = dados);
+    const listaFiltrada = this.cadClienteService.listar().pipe(map(cadCliente => cadCliente));
+    listaFiltrada.subscribe(x => this.listaClientes = x);
   }
   
+  // Envia as informações preenchidas nos campos de filtro para a Service, retorna a lista de registros encontrados e atualiza a listaClientes exibida na tela
   enviarFormularioFiltro(f: NgForm) {
     this.cadClienteFilter.nome = f.value.filter.nome;
     this.cadClienteFilter.telefone = f.value.filter.telefone;
@@ -48,5 +44,12 @@ export class CadClienteListaComponent implements OnInit {
     //this.listar();
     form.resetForm();
     this.cadClienteFilter = {} as CadClienteFilter;
+  }
+
+   // Deleta um cliente cadastrado
+  deletar(cadCliente: CadCliente){
+    this.cadClienteService.deletar(cadCliente).subscribe(() => { 
+      this.listar();
+    }); 
   }
 }

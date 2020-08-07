@@ -1,7 +1,6 @@
 <div class="card add-lista">
     <h5 class="card-header">Filtrar cliente</h5>
     <div class="card-body">
-        <!--<form id="add-form" [formGroup]="formularioCadastroCliente" (ngSubmit)="f.form.valid && enviarFormularioFiltro(f)" #f="ngForm" novalidate>-->
             <form #f="ngForm" (ngSubmit)="enviarFormularioFiltro(f)" novalidate>
             <div class="form-group">
                 <div class="row">
@@ -38,8 +37,8 @@
             </div>
         </div>
         <div class=text-right>
-            <button type="submit" class="btn btn-danger" float="right" name="btn-filtrar-cliente">Filtrar</button>
-            <button type="reset" class="btn btn-light ml-1" float="right" name="btn-limpar-form" (click)="cleanForm(f)">Limpar</button>
+            <button type="submit" class="btn btn-danger" name="btn-filtrar-cliente">Filtrar</button>
+            <button type="reset" class="btn btn-light ml-1" name="btn-limpar-form" (click)="cleanForm(f)">Limpar</button>
         </div>
         </form>
     </div>
@@ -59,20 +58,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let c of listaClientes">
-            <td>{{ c.nome }}</td>
-            <td>{{ c.telefone }}</td>
-            <td>{{ c.rg }}</td>
-            <td>{{ c.cpf }}</td>
+            <tr *ngFor="let cliente of listaClientes">
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td>{{ cliente.rg }}</td>
+            <td>{{ cliente.cpf }}</td>
             <td>
-                <button type="button" class="btn btn-light btn-sm">Editar</button> <!-- (click)="editCar(car)" -->
-                <button type="button" class="btn btn-danger btn-sm ml-1">Deletar</button> <!-- (click)="deleteCar(car)"-->
+                <button type="button" class="btn btn-light btn-sm" [routerLink]="['/cadastro-cliente/editar', cliente.id]" >Editar</button>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deletar(cliente)">Deletar</button>    
             </td>
             </tr>
-            <tr *ngIf="listaClientes.length == 0">
+            <tr *ngIf="listaClientes && listaClientes.length == 0">
                 <td>Nenhum registro encontrado!</td>
             </tr>
         </tbody>
         </table>
     </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
 </div>
