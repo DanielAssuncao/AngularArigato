@@ -1,3 +1,5 @@
+import { CadEndereco } from './cad-endereco';
+
 export interface CadCliente {
     id: number;
     nome: string;
@@ -6,6 +8,6 @@ export interface CadCliente {
     rg: number;
     cpf: number;
     dataCadastro: Date;
-    //cadEndereco: cadEndereco;
+    cadEndereco: CadEndereco;
     ddd: number;
 }
