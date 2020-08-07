@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Remover as setas dos inputs do tipo número (Chrome) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* Remover as setas dos inputs do tipo número (Firefox) */
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+.btn-danger {
+    background-color: red;
+  }
