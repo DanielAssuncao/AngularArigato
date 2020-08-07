@@ -1,3 +1,4 @@
+import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CadClienteListaComponent } from './componentes/cadastro-cliente/cad-cliente-lista/cad-cliente-lista.component';
@@ -24,7 +25,7 @@ const routes: Routes = [
     component: CadClienteNovoComponent
   },
   {
-    path: "cadastro-cliente/editar",
+    path: "cadastro-cliente/editar/:id",
     component: CadClienteEditarComponent
   },
   {
