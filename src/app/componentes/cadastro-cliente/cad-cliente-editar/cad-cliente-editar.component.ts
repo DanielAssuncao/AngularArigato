@@ -26,6 +26,7 @@ export class CadClienteEditarComponent implements OnInit {
   ngOnInit() {
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.buscarCadCliente(this.id);
+    this.buscarCadCidades();
   }
 
   // Voltar para tela anterior

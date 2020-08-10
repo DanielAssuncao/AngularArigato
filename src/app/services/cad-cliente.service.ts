@@ -83,7 +83,7 @@ export class CadClienteService {
   };
 
   buscarCadCidades(): Observable<CadCidade[]>{
-    return this.httpClient.get<CadCidade[]>(this._baseURL + '/buscarCidades', this.httpOptions)
+    return this.httpClient.get<CadCidade[]>(this._baseURL + '/buscarCadCidades', this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError))

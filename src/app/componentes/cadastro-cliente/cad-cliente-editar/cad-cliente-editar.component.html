@@ -85,9 +85,9 @@
                 <div class="col-sm-4">
                     <div ngModelGroup="cadastro" #formEndCidadeCtrl="ngModelGroup">
                         <label for="endCidade">Cidade</label>
-                        <!--<select class="form-control" name="endCidade" [ngModel]="cadastro">
-                            <option *ngFor="let cidade of cliente.cadEndereco" value="{{ cidade.id }}">{{ cidade.nome }}</option>
-                        </select>-->
+                        <select class="form-control" name="endCidade">
+                            <option *ngFor="let cidade of listaCidades" value="{{ cidade.id }}" [selected]="cidade.id==cliente.cadEndereco.cadCidade.id">{{ cidade.nome }}</option>
+                        </select>
                     </div>
                 </div>
             </div>
