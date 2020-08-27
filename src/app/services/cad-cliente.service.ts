@@ -23,8 +23,14 @@ export class CadClienteService {
 
   // Headers
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({  'Content-Type': 'application/json' })
   }
+  httpOptionsString = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json"
+    }),
+    responseType: "text" as "json"
+  };
 
   // Obtem a lista de todos os clientes cadastrados no sistema
   listar(): Observable<CadCliente[]>{
@@ -36,6 +42,8 @@ export class CadClienteService {
 
   // Obtem a lista de todos os clientes cadastrados no sistema de acordo com o filtro inserido
   listarComFiltro(filter : CadClienteFilter): Observable<CadCliente[]>{
+    console.log(this._baseURL + '/lista');
+    console.log(filter);
     return this.httpClient.post<CadCliente[]>(this._baseURL + '/lista', JSON.stringify(filter), this.httpOptions)
     .pipe(
       retry(2),
@@ -60,12 +68,13 @@ export class CadClienteService {
   }
 
   // Atualiza um cliente cadastrado
-  atualizar(cadCliente: CadCliente): Observable<CadCliente>{
-    return this.httpClient.post<CadCliente>(this._baseURL + '/atualizar', JSON.stringify(cadCliente), this.httpOptions)
+  atualizar(cadCliente : CadCliente): Observable<String>{
+    console.log(this._baseURL + '/atualizar');
+    console.log(cadCliente);
+    return this.httpClient.post<String>(this._baseURL + '/atualizar', JSON.stringify(cadCliente), this.httpOptionsString)
     .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
+      retry(2),
+      catchError(this.handleError))
   }
 
   // Manipulação de erros

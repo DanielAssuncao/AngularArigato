@@ -18,13 +18,17 @@ export class CadClienteEditarComponent implements OnInit {
   cadCliente = {} as CadCliente;
   cliente = {} as CadCliente
   cadEndereco = {} as CadEndereco;
+  cadCidade = {} as CadCidade;
   listaCidades: Array<CadCidade>;
+  response: String;
 
   constructor(private cadClienteService: CadClienteService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // Busca o id da url (rota) para utiliza-lo na busca de cadastro de clientes por id
     this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+    
     this.buscarCadCliente(this.id);
     this.buscarCadCidades();
   }
@@ -37,7 +41,7 @@ export class CadClienteEditarComponent implements OnInit {
   // Buscar cliente por id
   buscarCadCliente(id: number){
     const cadClienteEncontrado = this.cadClienteService.editar(id).pipe(map(cadCliente => cadCliente));
-    cadClienteEncontrado.subscribe(x => {this.cliente = x, console.log(this.cliente)})
+    cadClienteEncontrado.subscribe(x => {this.cliente = x})
   }
 
   //Buscar lista de cidades
@@ -49,6 +53,15 @@ export class CadClienteEditarComponent implements OnInit {
 
   // Envia as informações preenchidas nos campos de cadastro para a Service
   enviarFormularioCadastro(f: NgForm){
+    this.cadCidade.nome = f.value.cadastro.endCidade;
+
+    this.cadEndereco.logradouro = f.value.cadastro.endLogradouro;
+    this.cadEndereco.numero = f.value.cadastro.endNumero;
+    this.cadEndereco.complemento = f.value.cadastro.endComplemento;
+    this.cadEndereco.bairro = f.value.cadastro.endBairro;
+    this.cadEndereco.cep = f.value.cadastro.endCep;
+    this.cadEndereco.referencia = f.value.cadastro.endReferencia;
+
     this.cadCliente.id = f.value.cadastro.id;
     this.cadCliente.nome = f.value.cadastro.nome;
     this.cadCliente.ddd = f.value.cadastro.ddd;
@@ -57,13 +70,13 @@ export class CadClienteEditarComponent implements OnInit {
     this.cadCliente.rg = f.value.cadastro.rg;
     this.cadCliente.cpf = f.value.cadastro.cpf;
 
-    this.cadCliente.cadEndereco.logradouro = f.value.cadastro.endLogradouro;
-    this.cadCliente.cadEndereco.numero = f.value.cadastro.endNumero;
-    this.cadCliente.cadEndereco.complemento = f.value.cadastro.endComplemento;
-    this.cadCliente.cadEndereco.bairro = f.value.cadastro.endBairro;
-    this.cadCliente.cadEndereco.cep = f.value.cadastro.endCep;
-    this.cadCliente.cadEndereco.referencia = f.value.cadastro.endReferencia;
+    this.cadEndereco.cidade = this.cadCidade;
+    this.cadCliente.cadEndereco = this.cadEndereco;
 
-    this.cadClienteService.atualizar(this.cadCliente);
+    // Limpa retorno para não carregar valor incorreto
+    this.response = '';
+
+    this.cadClienteService.atualizar(this.cadCliente).subscribe(x => {this.response = x});
+    
   }
 }

@@ -5,7 +5,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm">
-                        <div ngModelGroup="filter" #formNomeCtrl="ngModelGroup">
+                        <div ngModelGroup="filter">
                             <label for="nome">Nome</label>
                             <input class="form-control" type="text" name="nome" [ngModel]="filter">
                             <!-- [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div ngModelGroup="filter" #formTelefoneCtrl="ngModelGroup">
+                        <div ngModelGroup="filter">
                             <label for="telefone">Telefone</label>
                             <input class="form-control" type="number" name="telefone" [ngModel]="filter">
                         </div>
@@ -23,13 +23,13 @@
                 </div>
             <div class="row">
                 <div class="col-sm">
-                    <div ngModelGroup="filter" #formRGCtrl="ngModelGroup">
+                    <div ngModelGroup="filter">
                         <label for="rg">RG</label>
                         <input class="form-control" type="number" name="rg" [ngModel]="filter">
                     </div>
                 </div>
                 <div class="col-sm">
-                    <div ngModelGroup="filter" #formCPFCtrl="ngModelGroup">
+                    <div ngModelGroup="filter">
                         <label for="cpf">CPF</label>
                         <input class="form-control" type="number" name="cpf" [ngModel]="filter">
                     </div>

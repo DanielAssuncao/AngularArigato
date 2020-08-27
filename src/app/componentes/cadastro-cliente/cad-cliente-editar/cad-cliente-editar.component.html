@@ -1,15 +1,14 @@
-
 <div class="card add-lista">
     <h5 class="card-header">Editar cadastro do cliente</h5>
     <div class="card-body">
             <form #f="ngForm" (ngSubmit)="enviarFormularioCadastro(f)" novalidate>
-                <input type="hidden" id="id" name ="id"/>
+                <input class="form-control" type="hidden" id="id" name ="id" [ngModel]="cadastro" value ="{{cliente.id}}"/>
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm">
-                        <div ngModelGroup="cadastro" #formNomeCtrl="ngModelGroup">
+                        <div ngModelGroup="cadastro">
                             <label for="nome">Nome</label>
-                            <input class="form-control" type="text" name="nome" [ngModel]="cadastro" value="{{ cliente.nome }}">
+                            <input class="form-control" type="text" name="nome" id="nome" [ngModel]="cliente.nome">
                             <!-- [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }">
                             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                                 <div *ngIf="model.errors.required">Modelo é obrigatório</div>
@@ -17,93 +16,120 @@
                         </div>
                     </div>
                     <div class="col-sm-1">
-                        <div ngModelGroup="cadastro" #formDddCtrl="ngModelGroup">
+                        <div ngModelGroup="cadastro">
                             <label for="ddd">DDD</label>
-                            <input class="form-control" type="number" name="ddd" [ngModel]="cadastro" value="{{ cliente.ddd }}">
+                            <input class="form-control" type="number" name="ddd" id="ddd" [ngModel]="cliente.ddd">
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <div ngModelGroup="cadastro" #formTelefoneCtrl="ngModelGroup">
+                        <div ngModelGroup="cadastro">
                             <label for="telefone">Telefone</label>
-                            <input class="form-control" type="tel" name="telefone" [ngModel]="cadastro" value="{{ cliente.telefone }}">
+                            <input class="form-control" type="tel" name="telefone" [ngModel]="cliente.telefone">
                         </div>
                     </div>
                 </div>
             <div class="row">
                 <div class="col-sm-3">
-                    <div ngModelGroup="cadastro" #formDataNascimentoCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="dataNascimento">Data de Nascimento</label>
-                        <input class="form-control" type="date" name="dataNascimento" [ngModel]="cadastro"  value="{{ cliente.dataNascimento | date: 'yyyy-MM-dd' }}">
+                        <input class="form-control" type="date" name="dataNascimento" [ngModel]="cliente.dataNascimento | date: 'yyyy-MM-dd'">
                     </div>
                 </div>
                 <div class="col-sm">
-                    <div ngModelGroup="cadastro" #formRGCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="rg">RG</label>
-                        <input class="form-control" type="number" name="rg" [ngModel]="cadastro" value="{{ cliente.rg }}">
+                        <input class="form-control" type="number" name="rg" [ngModel]="cliente.rg">
                     </div>
                 </div>
                 <div class="col-sm">
-                    <div ngModelGroup="cadastro" #formCPFCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="cpf">CPF</label>
-                        <input class="form-control" type="number" name="cpf" [ngModel]="cadastro" value="{{ cliente.cpf }}">
+                        <input class="form-control" type="number" name="cpf" [ngModel]="cliente.cpf">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <div ngModelGroup="cadastro" #formEndLogradouroCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endLogradouro">Logradouro</label>
-                        <input class="form-control" type="text" name="endLogradouro" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.logradouro }}">
+                        <input class="form-control" type="text" name="endLogradouro" [ngModel]="cliente.cadEndereco?.logradouro">
                     </div>
                 </div>
                 <div class="col-sm-1">
-                    <div ngModelGroup="cadastro" #formEndNumeroCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endNumero">Número</label>
-                        <input class="form-control" type="number" name="endNumero" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.numero }}">
+                        <input class="form-control" type="number" name="endNumero" [ngModel]="cliente.cadEndereco?.numero">
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div ngModelGroup="cadastro" #formEndComplementoCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endComplemento">Complemento</label>
-                        <input class="form-control" type="text" name="endComplemento" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.complemento }}">
+                        <input class="form-control" type="text" name="endComplemento" [ngModel]="cliente.cadEndereco?.complemento">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <div ngModelGroup="cadastro" #formEndBairroCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endBairro">Bairro</label>
-                        <input class="form-control" type="text" name="endBairro" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.bairro }}">
+                        <input class="form-control" type="text" name="endBairro" [ngModel]="cliente.cadEndereco?.bairro">
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <div ngModelGroup="cadastro" #formEndCepCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endCep">CEP</label>
-                        <input class="form-control" type="number" name="endCep" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.cep }}">
+                        <input class="form-control" type="number" name="endCep" [ngModel]="cliente.cadEndereco?.cep">
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div ngModelGroup="cadastro" #formEndCidadeCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endCidade">Cidade</label>
-                        <select class="form-control" name="endCidade">
-                            <option *ngFor="let cidade of listaCidades" value="{{ cidade.id }}" [selected]="cidade.id==cliente.cadEndereco.cadCidade.id">{{ cidade.nome }}</option>
+                        <select class="form-control" name="endCidade" [ngModel]="listaCidades.id">
+                            <option *ngFor="let cidade of listaCidades" [selected]="cidade.id==cliente.cadEndereco.cadCidade.id">{{ cidade.nome }}</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <div ngModelGroup="cadastro" #formEndReferenciaCtrl="ngModelGroup">
+                    <div ngModelGroup="cadastro">
                         <label for="endReferencia">Referência</label>
-                        <input class="form-control" type="text" name="endReferencia" [ngModel]="cadastro" value="{{ cliente.cadEndereco?.referencia }}">
+                        <input class="form-control" type="text" name="endReferencia" [ngModel]="cliente.cadEndereco?.referencia">
                     </div>
                 </div>
             </div>
         </div>
         <div class=text-right>
             <button type="button" class="btn btn-light btn-sm" (click)="goBack()">Voltar</button>
-            <button type="submit" class="btn btn-danger btn-sm ml-1" name="btn-salvar-cliente">Salvar</button>            
+            <button type="submit" class="btn btn-danger btn-sm ml-1" name="btn-salvar-cliente" data-toggle="modal" data-target="#myModal">Salvar</button>            
         </div>
         </form>
     </div>
-  </div>
+</div>
+  
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div *ngIf="response && response == 'Cadastro salvo com sucesso!'">
+                <b style="color: green;">{{ response }}</b>
+            </div>
+            <div *ngIf="response && response != 'Cadastro salvo com sucesso!'">
+                <b style="color: red;">{{ response }}</b>
+            </div>
+            <div *ngIf="!response || response == ''">
+                <b style="color: red;">Erro inesperado. Por favor, contate o administrador do sistema!</b>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm ml-1" data-dismiss="modal">Close</button>
+        </div>
+        
+    </div>
+    </div>
+</div>
