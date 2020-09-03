@@ -42,8 +42,6 @@ export class CadClienteService {
 
   // Obtem a lista de todos os clientes cadastrados no sistema de acordo com o filtro inserido
   listarComFiltro(filter : CadClienteFilter): Observable<CadCliente[]>{
-    console.log(this._baseURL + '/lista');
-    console.log(filter);
     return this.httpClient.post<CadCliente[]>(this._baseURL + '/lista', JSON.stringify(filter), this.httpOptions)
     .pipe(
       retry(2),
@@ -69,8 +67,6 @@ export class CadClienteService {
 
   // Atualiza um cliente cadastrado
   atualizar(cadCliente : CadCliente): Observable<String>{
-    console.log(this._baseURL + '/atualizar');
-    console.log(cadCliente);
     return this.httpClient.post<String>(this._baseURL + '/atualizar', JSON.stringify(cadCliente), this.httpOptionsString)
     .pipe(
       retry(2),

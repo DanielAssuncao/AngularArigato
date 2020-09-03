@@ -8,5 +8,5 @@ export interface CadEndereco {
     bairro: string;
     cep: number;
     referencia: string;
-    cidade: CadCidade;
+    cadCidade: CadCidade;
 }

@@ -2,17 +2,15 @@
     <h5 class="card-header">Editar cadastro do cliente</h5>
     <div class="card-body">
             <form #f="ngForm" (ngSubmit)="enviarFormularioCadastro(f)" novalidate>
-                <input class="form-control" type="hidden" id="id" name ="id" [ngModel]="cadastro" value ="{{cliente.id}}"/>
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm">
                         <div ngModelGroup="cadastro">
-                            <label for="nome">Nome</label>
-                            <input class="form-control" type="text" name="nome" id="nome" [ngModel]="cliente.nome">
-                            <!-- [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }">
-                            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
-                                <div *ngIf="model.errors.required">Modelo é obrigatório</div>
-                            </div> -->
+                            <b style="color:red">*</b><label for="nome">Nome</label>
+                            <input class="form-control" type="text" name="nome" id="nome" [ngModel]="cliente.nome" #nome="ngModel" required>
+                            <div *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)" class="alert alert-danger">
+                                <div *ngIf="nome?.errors.required">Nome é obrigatório.</div>
+                            </div>                            
                         </div>
                     </div>
                     <div class="col-sm-1">
@@ -43,16 +41,22 @@
                 </div>
                 <div class="col-sm">
                     <div ngModelGroup="cadastro">
-                        <label for="cpf">CPF</label>
-                        <input class="form-control" type="number" name="cpf" [ngModel]="cliente.cpf">
+                        <b style="color:red">*</b><label for="cpf">CPF</label>
+                        <input class="form-control" type="number" name="cpf" required="required" [ngModel]="cliente.cpf" #cpf="ngModel" required>
+                        <div *ngIf="cpf?.invalid && (cpf?.dirty || cpf?.touched)" class="alert alert-danger">
+                            <div *ngIf="cpf?.errors.required">CPF é obrigatório.</div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
                     <div ngModelGroup="cadastro">
-                        <label for="endLogradouro">Logradouro</label>
-                        <input class="form-control" type="text" name="endLogradouro" [ngModel]="cliente.cadEndereco?.logradouro">
+                        <b style="color:red">*</b><label for="endLogradouro">Logradouro</label>
+                        <input class="form-control" type="text" name="endLogradouro" [ngModel]="cliente.cadEndereco?.logradouro" #endLogradouro="ngModel" required>
+                        <div *ngIf="endLogradouro?.invalid && (endLogradouro?.dirty || endLogradouro?.touched)" class="alert alert-danger">
+                            <div *ngIf="endLogradouro?.errors.required">Logradouro é obrigatório.</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -84,8 +88,8 @@
                 <div class="col-sm-4">
                     <div ngModelGroup="cadastro">
                         <label for="endCidade">Cidade</label>
-                        <select class="form-control" name="endCidade" [ngModel]="listaCidades.id">
-                            <option *ngFor="let cidade of listaCidades" [selected]="cidade.id==cliente.cadEndereco.cadCidade.id">{{ cidade.nome }}</option>
+                        <select class="form-control" name="endCidade" [ngModel]="cliente.cadEndereco?.cadCidade?.id">
+                            <option *ngFor="let cidade of listaCidades" [selected]="cidade.id==cliente.cadEndereco.cadCidade.id" [ngValue]="cidade.id">{{ cidade.nome }}</option>
                         </select>
                     </div>
                 </div>
@@ -99,6 +103,7 @@
                 </div>
             </div>
         </div>
+        <b>Os campos com (</b><b style="color:red">*</b><b>) são obrigatórios!</b>
         <div class=text-right>
             <button type="button" class="btn btn-light btn-sm" (click)="goBack()">Voltar</button>
             <button type="submit" class="btn btn-danger btn-sm ml-1" name="btn-salvar-cliente" data-toggle="modal" data-target="#myModal">Salvar</button>            

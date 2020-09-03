@@ -53,8 +53,9 @@ export class CadClienteEditarComponent implements OnInit {
 
   // Envia as informações preenchidas nos campos de cadastro para a Service
   enviarFormularioCadastro(f: NgForm){
-    this.cadCidade.nome = f.value.cadastro.endCidade;
+    this.cadCidade.id = f.value.cadastro.endCidade;
 
+    this.cadEndereco.id = this.cliente.cadEndereco.id;
     this.cadEndereco.logradouro = f.value.cadastro.endLogradouro;
     this.cadEndereco.numero = f.value.cadastro.endNumero;
     this.cadEndereco.complemento = f.value.cadastro.endComplemento;
@@ -62,7 +63,7 @@ export class CadClienteEditarComponent implements OnInit {
     this.cadEndereco.cep = f.value.cadastro.endCep;
     this.cadEndereco.referencia = f.value.cadastro.endReferencia;
 
-    this.cadCliente.id = f.value.cadastro.id;
+    this.cadCliente.id = this.cliente.id;
     this.cadCliente.nome = f.value.cadastro.nome;
     this.cadCliente.ddd = f.value.cadastro.ddd;
     this.cadCliente.telefone = f.value.cadastro.telefone;
@@ -70,7 +71,7 @@ export class CadClienteEditarComponent implements OnInit {
     this.cadCliente.rg = f.value.cadastro.rg;
     this.cadCliente.cpf = f.value.cadastro.cpf;
 
-    this.cadEndereco.cidade = this.cadCidade;
+    this.cadEndereco.cadCidade = this.cadCidade;
     this.cadCliente.cadEndereco = this.cadEndereco;
 
     // Limpa retorno para não carregar valor incorreto
